@@ -27,30 +27,10 @@ export interface AgentMessageToolResultsContent {
     }
 }
 
-export interface AgentMessageChartContent {
-    type: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    chart: any;
-}
-
-export interface AgentMessageTableContent {
-    type: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    table: any;
-}
-
-export interface AgentMessageFetchedTableContent {
-    type: string,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    tableMarkdown: string;
-    toolResult: boolean;
-}
-
-
 export interface AgentMessage {
     id: string;
     role: AgentMessageRole;
-    content: (AgentMessageTextContent | AgentMessageToolUseContent | AgentMessageToolResultsContent | AgentMessageChartContent | AgentMessageTableContent | AgentMessageFetchedTableContent)[];
+    content: (AgentMessageTextContent | AgentMessageToolUseContent | AgentMessageToolResultsContent)[];
 }
 
 export interface CortexAnalystTool {
@@ -67,17 +47,10 @@ export interface CortexSearchTool {
     }
 }
 
-export interface SqlExecTool {
+export interface Data2AnalyticsTool {
     "tool_spec": {
-        "type": "sql_exec",
+        "type": "cortex_analyst_sql_exec",
         "name": "sql_exec"
-    }
-}
-
-export interface DataToChartTool {
-    "tool_spec": {
-        "type": "data_to_chart",
-        "name": "data_to_chart"
     }
 }
 
@@ -101,7 +74,7 @@ export interface AgentRequestParams {
         EnableRelatedQueries?: boolean;
     },
     messages: AgentMessage[],
-    tools: (CortexAnalystTool | CortexSearchTool | SqlExecTool | DataToChartTool)[],
+    tools: (CortexAnalystTool | CortexSearchTool | Data2AnalyticsTool)[],
     tool_resources: (CortexAnalystToolResource | CortexSearchToolResource)[],
 }
 
